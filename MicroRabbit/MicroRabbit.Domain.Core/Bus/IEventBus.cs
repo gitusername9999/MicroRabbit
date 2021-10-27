@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using MicroRabbit.Domain.Core.Commands; // needed for Command
-using using MicroRabbit.Domain.Core.Events; // needed for Event
+using MicroRabbit.Domain.Core.Events; // needed for Event
 
 
 namespace MicroRabbit.Domain.Core.Bus

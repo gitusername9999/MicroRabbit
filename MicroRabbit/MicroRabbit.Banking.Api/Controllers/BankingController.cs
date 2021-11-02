@@ -1,4 +1,5 @@
 ﻿using MicroRabbit.Banking.Application.Interfaces;
+using MicroRabbit.Banking.Application.Models;
 using MicroRabbit.Banking.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -14,29 +15,24 @@ namespace MicroRabbit.Banking.Api.Controllers
     [ApiController]
     public class BankingController : ControllerBase
     {
-        private readonly IAccountService _accountService;
+        private readonly IAccountService iAccountService;
 
-        public BankingController(IAccountService accountService)
+        public BankingController(IAccountService iAccountService)
         {
-            _accountService = accountService;
+            this.iAccountService = iAccountService;
         }
         // GET api/value
         [HttpGet]
         public ActionResult<IEnumerable<Account>> Get()
         {
+            return Ok(iAccountService.GetAccounts());
+        }
 
-            //var rng = new Random();
-            //return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            //{
-            //    Date = DateTime.Now.AddDays(index),
-            //    TemperatureC = rng.Next(-20, 55),
-            //    Summary = Summaries[rng.Next(Summaries.Length)]
-            //})
-            //.ToArray();
-
-            return Ok(_accountService.GetAccounts());
-
-
+        [HttpPost]
+        public IActionResult Post([FromBody] AccountTransfer accountTransfer)
+        {
+            iAccountService.Transfer(accountTransfer);
+            return Ok(accountTransfer);
         }
     }
 }

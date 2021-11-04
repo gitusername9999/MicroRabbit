@@ -7,17 +7,17 @@ namespace MicroRabbit.Banking.Domain.Commands
     // TransferCommand is the based class for Transfer Commands
     public class CreateTransferCommand : TransferCommand
     {
-        public CreateTransferCommand (int from, int to, decimal amount)
+        public CreateTransferCommand (int fromAcount, int toAcount, decimal transferAmount)
         {
-            // assign the passed in variable from (containing info for source) to variable From (the variable member of the
+            // assign the passed in variable fromAcount (containing info for source) toAcount variable FromAccount (the variable member of the
             // the based class TransferCommand)
-            From = from;
-            // assign the passed in variable to (containing info for destination) to variable To (the variable member of the
+            FromAccount = fromAcount;
+            // assign the passed in variable toAcount (containing info for destination) toAcount variable ToAccount (the variable member of the
             // the based class TransferCommand)
-            To = to;
-            // assign the passed in variable amount to variable Amount (the variable member of the
+            ToAccount = toAcount;
+            // assign the passed in variable transferAmount toAcount variable TransferAmount (the variable member of the
             // the based class TransferCommand)
-            Amount = amount;
+            TransferAmount = transferAmount;
         }
     }
 }

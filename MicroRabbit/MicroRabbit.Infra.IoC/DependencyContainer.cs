@@ -19,22 +19,22 @@ namespace MicroRabbit.Infra.IoC
     public class DependencyContainer
     {
         // RegisterService takes Interface to Collection of Services
-        // Adding transient services of types specified in IEventBus, IAccountService, IAccountRepository, and BankingDbContext
+        // Adding transient iServices of types specified in IEventBus, IAccountService, IAccountRepository, and BankingDbContext
         // with implementation type specified in RabbitMQBus, AccountService, and AccountRepository
-        public static void RegisterServices(IServiceCollection services)
+        public static void RegisterServices(IServiceCollection iServices)
         {
             // Domain Bus
-            services.AddTransient<IEventBus, RabbitMQBus>();
+            iServices.AddTransient<IEventBus, RabbitMQBus>();
 
             // Domain Banking Commands
-            services.AddTransient<IRequestHandler<CreateTransferCommand, bool>, TransferCommandHandler>();
+            iServices.AddTransient<IRequestHandler<CreateTransferCommand, bool>, TransferCommandHandler>();
 
             //Application Services
-            services.AddTransient<IAccountService, AccountService>();
+            iServices.AddTransient<IAccountService, AccountService>();
 
             //Data
-            services.AddTransient<IAccountRepository, AccountRepository>();
-            services.AddTransient<BankingDbContext>();
+            iServices.AddTransient<IAccountRepository, AccountRepository>();
+            iServices.AddTransient<BankingDbContext>();
 
         }
     }

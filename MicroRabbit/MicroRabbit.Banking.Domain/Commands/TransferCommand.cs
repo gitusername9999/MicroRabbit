@@ -8,8 +8,8 @@ namespace MicroRabbit.Banking.Domain.Commands
     public abstract class TransferCommand : Command
     {
         // Declare set as protected so only ones who can extend / inherit it can modify or set data
-        public int From { get; protected set; }
-        public int To { get; protected set; }
-        public decimal Amount { get; protected set; }
+        public int FromAccount { get; protected set; }
+        public int ToAccount { get; protected set; }
+        public decimal TransferAmount { get; protected set; }
     }
 }

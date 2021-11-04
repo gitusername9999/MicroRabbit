@@ -16,21 +16,21 @@ namespace MicroRabbit.Infra.Bus
     // Seal this class to prevent it from be extended or inherited
     public sealed class RabbitMQBus : IEventBus
     {
-        private readonly IMediator _mediator;
+        private readonly IMediator _iMediator;
         // Dictionary of a list of event handlers
         private readonly Dictionary<string, List<Type>> _handlers;
         private readonly List<Type> _eventTypes;
 
-        public RabbitMQBus (IMediator mediator)
+        public RabbitMQBus (IMediator iMediator)
         {
-            _mediator = mediator;
+            _iMediator = iMediator;
             _handlers = new Dictionary<string, List<Type>>();
             _eventTypes = new List<Type>();
         }
 
         public Task SendCommand<T>(T command) where T : Command
         {
-            return _mediator.Send(command);
+            return _iMediator.Send(command);
         }
 
         public void Publish<T>(T @event) where T : Event
@@ -50,12 +50,12 @@ namespace MicroRabbit.Infra.Bus
 
         // Subscript take input of type Event and type handler of type IEventHandler
 
-        public void Subscribe<T, TH>()
+        public void Subscribe<T, IEH>()
             where T : Event
-            where TH : IEventHandler<T>
+            where IEH : IEventHandler<T>
         {
             var eventName = typeof(T).Name;
-            var handlerType = typeof(TH);
+            var handlerType = typeof(IEH);
             // If enventTypes does not contain event of type Event, then add the type of T to the list of events (_eventTypes)
             if (!_eventTypes.Contains(typeof(T)))
             {

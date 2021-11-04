@@ -37,7 +37,7 @@ namespace MicroRabbit.Banking.Domain.CommandHandlers
 
             // Publishing requested event to RabbitMQ serverice
             // We could have ceate a TransferCreatedEvent to just take a request object instead of its data properties
-            _iEventBus.Publish(new TransferCreatedEvent(request.From, request.To, request.Amount));
+            _iEventBus.Publish(new TransferCreatedEvent(request.FromAccount, request.ToAccount, request.TransferAmount));
 
 
             return Task.FromResult(true);

@@ -28,59 +28,59 @@ namespace MicroRabbit.Banking.Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        // This method gets called by the runtime. Use this method to add iServices to the container.
+        public void ConfigureServices(IServiceCollection iServices)
         {
-            services.AddDbContext<BankingDbContext>
+            iServices.AddDbContext<BankingDbContext>
             (
                 options =>
                 {
                     options.UseSqlServer(Configuration.GetConnectionString("BankingDbConnection"));
                 }
              );
-             services.AddControllers();
+             iServices.AddControllers();
 
-            services.AddSwaggerGen(c =>
+            iServices.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "Banking Microservices", Version = "v1" });
 
             });
 
-            services.AddMediatR(typeof(Startup));
+            iServices.AddMediatR(typeof(Startup));
             
-            //Added this to register services
-            RegisterServices(services);
+            //Added this to register iServices
+            RegisterServices(iServices);
         }
 
-        private void RegisterServices(IServiceCollection services)
+        private void RegisterServices(IServiceCollection iServices)
         {
-            //Call the RegisterServices in the DependencyContainer to register the services
-            DependencyContainer.RegisterServices(services);
+            //Call the RegisterServices in the DependencyContainer to register the iServices
+            DependencyContainer.RegisterServices(iServices);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder iApp, IWebHostEnvironment iWebHostEnv)
         {
-            if (env.IsDevelopment())
+            if (iWebHostEnv.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                iApp.UseDeveloperExceptionPage();
             }
 
 
-            app.UseHttpsRedirection();
-            app.UseSwagger();
-            app.UseSwaggerUI
+            iApp.UseHttpsRedirection();
+            iApp.UseSwagger();
+            iApp.UseSwaggerUI
             (c => 
                 {
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Banking Microservice v1");
                 } 
             );
             
-            app.UseRouting();
+            iApp.UseRouting();
 
-            app.UseAuthorization();
+            iApp.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            iApp.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });

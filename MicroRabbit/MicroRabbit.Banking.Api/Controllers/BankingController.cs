@@ -15,23 +15,23 @@ namespace MicroRabbit.Banking.Api.Controllers
     [ApiController]
     public class BankingController : ControllerBase
     {
-        private readonly IAccountService iAccountService;
+        private readonly IAccountService _iAccountService;
 
         public BankingController(IAccountService iAccountService)
         {
-            this.iAccountService = iAccountService;
+            _iAccountService = iAccountService;
         }
         // GET api/value
         [HttpGet]
         public ActionResult<IEnumerable<Account>> Get()
         {
-            return Ok(iAccountService.GetAccounts());
+            return Ok(_iAccountService.GetAccounts());
         }
 
         [HttpPost]
         public IActionResult Post([FromBody] AccountTransfer accountTransfer)
         {
-            iAccountService.Transfer(accountTransfer);
+            _iAccountService.Transfer(accountTransfer);
             return Ok(accountTransfer);
         }
     }

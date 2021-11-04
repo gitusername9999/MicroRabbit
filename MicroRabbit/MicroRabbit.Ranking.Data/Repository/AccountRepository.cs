@@ -9,16 +9,16 @@ namespace MicroRabbit.Ranking.Data.Repository
 {
     public class AccountRepository : IAccountRepository
     {
-        private BankingDbContext _ctx;
+        private BankingDbContext _bankingDBContext;
 
-        public AccountRepository (BankingDbContext ctx)
+        public AccountRepository (BankingDbContext bankingDBContext)
         {
-            _ctx = ctx;
+            _bankingDBContext = bankingDBContext;
         }
 
         public IEnumerable<Account> GetAccounts()
         {
-            return _ctx.Accounts;
+            return _bankingDBContext.Accounts;
             
         }
     }

@@ -1,5 +1,5 @@
 using MicroRabbit.Infra.IoC;
-using MicroRabbit.Ranking.Data.Context;
+using MicroRabbit.Banking.Data.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;

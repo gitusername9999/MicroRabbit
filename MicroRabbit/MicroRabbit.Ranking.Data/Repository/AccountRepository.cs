@@ -1,11 +1,11 @@
 ﻿using MicroRabbit.Banking.Domain.Interfaces;
 using MicroRabbit.Banking.Domain.Models;
-using MicroRabbit.Ranking.Data.Context;
+using MicroRabbit.Banking.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MicroRabbit.Ranking.Data.Repository
+namespace MicroRabbit.Banking.Data.Repository
 {
     public class AccountRepository : IAccountRepository
     {

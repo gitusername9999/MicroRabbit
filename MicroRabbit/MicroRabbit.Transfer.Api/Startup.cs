@@ -16,6 +16,9 @@ using System.Threading.Tasks;
 using Microsoft.OpenApi.Models;
 using MediatR;
 using MicroRabbit.Transfer.Data.Context;
+using MicroRabbit.Domain.Core.Bus;
+using MicroRabbit.Transfer.Domain.Events;
+using MicroRabbit.Transfer.Domain.EventHandlers;
 
 namespace MicroRabbit.Transfer.Api
 {
@@ -89,6 +92,15 @@ namespace MicroRabbit.Transfer.Api
             {
                 endpoints.MapControllers();
             });
+
+            // Configure to consume events
+            ConfigureEventBus(iApp);
+        }
+
+        private void ConfigureEventBus(IApplicationBuilder iApp)
+        {
+            var eventBus = iApp.ApplicationServices.GetRequiredService<IEventBus>();
+            eventBus.Subscribe<TransferCreatedEvent, TransferEventHandler>();
         }
     }
 

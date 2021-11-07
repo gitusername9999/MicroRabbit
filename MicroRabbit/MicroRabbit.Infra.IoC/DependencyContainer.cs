@@ -1,18 +1,22 @@
 ﻿using MediatR;
-using MicroRabbit.Baning.Data.Repository;
+using MicroRabbit.Banking.Data.Repository;
 using MicroRabbit.Banking.Application.Interfaces;
 using MicroRabbit.Banking.Application.Services;
 using MicroRabbit.Banking.Domain.CommandHandlers;
 using MicroRabbit.Banking.Domain.Commands;
+using MicroRabbit.Banking.Domain.Events;
 using MicroRabbit.Banking.Domain.Interfaces;
 using MicroRabbit.Domain.Core.Bus;
 using MicroRabbit.Infra.Bus;
-using MicroRabbit.Ranking.Data.Context;
-using MicroRabbit.Ranking.Data.Repository;
+using MicroRabbit.Banking.Data.Context;
+using MicroRabbit.Banking.Data.Repository;
 using MicroRabbit.Transfer.Application.Interfaces;
 using MicroRabbit.Transfer.Data.Context;
+using MicroRabbit.Transfer.Domain.EventHandlers;
 using MicroRabbit.Transfer.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
+using MicroRabbit.Transfer.Domain.Events;
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -30,8 +34,12 @@ namespace MicroRabbit.Infra.IoC
             // Domain Bus
             iServices.AddTransient<IEventBus, RabbitMQBus>();
 
+            // Domain Events
+            iServices.AddTransient<IEventHandler<Transfer.Domain.Events.TransferCreatedEvent>, TransferEventHandler>();
+
             // Domain Banking Commands
             iServices.AddTransient<IRequestHandler<CreateTransferCommand, bool>, TransferCommandHandler>();
+
 
             //Application Services
             iServices.AddTransient<IAccountService, AccountService>();

@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MicroRabbit.Baning.Data.Repository
+namespace MicroRabbit.Banking.Data.Repository
 {
     public class TransferRepository : ITransferRepository
     {

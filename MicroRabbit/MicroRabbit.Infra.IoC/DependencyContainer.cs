@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MicroRabbit.Baning.Data.Repository;
 using MicroRabbit.Banking.Application.Interfaces;
 using MicroRabbit.Banking.Application.Services;
 using MicroRabbit.Banking.Domain.CommandHandlers;
@@ -8,6 +9,9 @@ using MicroRabbit.Domain.Core.Bus;
 using MicroRabbit.Infra.Bus;
 using MicroRabbit.Ranking.Data.Context;
 using MicroRabbit.Ranking.Data.Repository;
+using MicroRabbit.Transfer.Application.Interfaces;
+using MicroRabbit.Transfer.Data.Context;
+using MicroRabbit.Transfer.Domain.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -31,10 +35,13 @@ namespace MicroRabbit.Infra.IoC
 
             //Application Services
             iServices.AddTransient<IAccountService, AccountService>();
+            iServices.AddTransient<ITransferService, TransferService>();
 
             //Data
             iServices.AddTransient<IAccountRepository, AccountRepository>();
+            iServices.AddTransient<ITransferRepository, TransferRepository>();
             iServices.AddTransient<BankingDbContext>();
+            iServices.AddTransient<TransferDbContext>();
 
         }
     }

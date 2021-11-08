@@ -12,8 +12,8 @@ namespace MicroRabbit.Transfer.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FromAcount = table.Column<int>(type: "int", nullable: false),
-                    ToAcount = table.Column<int>(type: "int", nullable: false),
+                    FromAccount = table.Column<int>(type: "int", nullable: false),
+                    ToAccount = table.Column<int>(type: "int", nullable: false),
                     TransferAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>

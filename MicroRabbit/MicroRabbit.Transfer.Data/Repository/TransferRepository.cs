@@ -21,5 +21,13 @@ namespace MicroRabbit.Banking.Data.Repository
             return _transferDBContext.TransferLogs;
             
         }
+ 
+        public void Add(TransferLog transferLog)
+        {
+            // Add the transferlog into TransferLogs table
+            _transferDBContext.TransferLogs.Add(transferLog);
+            // Save the changes into the databasess
+            _transferDBContext.SaveChanges();
+        }
     }
 }

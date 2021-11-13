@@ -1,5 +1,7 @@
 ﻿using MicroRabbit.MVC.Models.DTO;
+using MicroRabbit.Transfer.Domain.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,25 @@ namespace MicroRabbit.MVC.Services
             _apiClient = apiClient;
         }
 
+        public async Task<HttpResponseMessage> GetTransferLogs()
+        {
+            var bankingServiceUri = "https://localhost:5003/api/transfer";
+            var response = new HttpResponseMessage();
+            var obj = new Object();
+            // !!!!! DO NOT DO THIS IN PRODUCTION> Create a Valid Certificate Instead !!!!!!!!!
+            //Might want to create a valid certificate instead in production
+            using (var httpClientHandler = new HttpClientHandler())
+            {
+                // !!!!! DO NOT DO THIS IN PRODUCTION> Create a Valid Certificate Instead !!!!!!!!!
+                httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
+                using (var _apiClient = new HttpClient(httpClientHandler))
+                {
+                    // The presentation layer is making the http call to our Banking Microservice.
+                    response = await _apiClient.GetAsync(bankingServiceUri);
+                }
+                return response;
+            }
+        }
 
         public async Task Transfer(TransferDto transferDto)
         {

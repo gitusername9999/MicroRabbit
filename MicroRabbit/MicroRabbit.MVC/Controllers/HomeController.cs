@@ -1,8 +1,10 @@
 ﻿using MicroRabbit.MVC.Models;
 using MicroRabbit.MVC.Models.DTO;
 using MicroRabbit.MVC.Services;
+using MicroRabbit.Transfer.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -67,6 +69,20 @@ namespace MicroRabbit.MVC.Controllers
             // Returning the index of this view back to the caller
             return View("Index");
 
+        }
+
+        [HttpGet]
+        // The presentation only knows the TransferViewModel at this point; declaring model as Transferviewmodel
+        public async Task<IActionResult> GetTransferLogs(TransferViewModel model)
+        {
+            // wait for the transfer to be completed
+            var response = await _iTransferService.GetTransferLogs();
+            var stringValue = await response.Content.ReadAsStringAsync();
+            var obj = JsonConvert.DeserializeObject<IEnumerable<TransferLog>>(stringValue);
+            var transferLogs = obj as IEnumerable<TransferLog>;
+            ViewBag.Message = "Testing Here";
+            ViewBag.Data = transferLogs;
+            return View("Index");            
         }
     }
 }

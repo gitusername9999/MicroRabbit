@@ -1,12 +1,11 @@
-﻿@{
-    ViewData["Title"] = "Trung Microservices With .Net Core Demo";
-}
+﻿@{ ViewData["Title"] = "Trung Microservices With .Net Core Demo"; }
+
 
 <div class="text-center">
     <h6 class="display-4">Trung's Microservices With .Net Core Quick Demo</h6>
 </div>
 
-<form action="/home/transfer" method="Post"\>
+<form action="/home/transfer" method="Post" \>
     <label for="FromAccount">From Account:</label>
     <input type="text" name="FromAccount" />
     <label for="ToAccount">To Account:</label>
@@ -14,4 +13,60 @@
     <label for="TransferAmount">Transfer Amount:</label>
     <input type="text" name="TransferAmount" />
     <input type="submit" name="Transfer" value="Transfer" />
+</form>
+
+<form action="/home/gettransferlogs" method="Get" \>
+    <input type="submit" name="GetTransferLogs" value="Get Transfer Logs" />
+    @ViewBag.Message
+    <div>
+        <table>
+            @if (@ViewBag.Data != null)
+            {
+@foreach (var item in @ViewBag.Data)
+{
+<tr>
+    <td>
+        @item.FromAccount
+    </td>
+    <td>
+        @item.ToAccount
+    </td>
+    <td>
+        @item.TransferAmount
+    </td>
+    <td>
+    </td>
+</tr>}           }
+        </table>
+    </div>
+    <div>
+        <ol>
+            @if (@ViewBag.Data != null)
+            {
+@foreach (var item in @ViewBag.Data)
+{
+<li>
+    <table>
+
+
+        <tr>
+            <td>
+                @item.FromAccount
+            </td>
+            <td>
+                @item.ToAccount
+            </td>
+            <td>
+                @item.TransferAmount
+            </td>
+            <td>
+            </td>
+        </tr>
+
+    </table>
+</li>}}
+        </ol>
+    </div>
+
+
 </form>

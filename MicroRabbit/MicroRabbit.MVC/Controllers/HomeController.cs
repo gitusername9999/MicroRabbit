@@ -18,6 +18,8 @@ namespace MicroRabbit.MVC.Controllers
     {
         private readonly ITransferService _iTransferService;
 
+        
+
         public HomeController(ITransferService iTransferService)
         {
             _iTransferService = iTransferService;
@@ -73,7 +75,7 @@ namespace MicroRabbit.MVC.Controllers
 
         [HttpGet]
         // The presentation only knows the TransferViewModel at this point; declaring model as Transferviewmodel
-        public async Task<IActionResult> GetTransferLogs(TransferViewModel model)
+        public async Task<IActionResult> GetTransferLogs()
         {
             // wait for the transfer to be completed
             var response = await _iTransferService.GetTransferLogs();
@@ -81,6 +83,7 @@ namespace MicroRabbit.MVC.Controllers
             var obj = JsonConvert.DeserializeObject<IEnumerable<TransferLog>>(stringValue);
             var transferLogs = obj as IEnumerable<TransferLog>;
             ViewBag.Message = "Testing Here";
+            // Passing data into the presentation View
             ViewBag.Data = transferLogs;
             return View("Index");            
         }
